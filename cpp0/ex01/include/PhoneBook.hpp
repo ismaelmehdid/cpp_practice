@@ -8,13 +8,15 @@ class PhoneBook
 	public:
 		PhoneBook();
 		void	addContact(Contact contact);
-		void	showContacts() const;
+		void	displayContacts() const;
+		void	displayContactDetails(int index) const;
+		void	promptForContact();
 		~PhoneBook();
 	private:
 		Contact m_contacts[8];
 		int		m_nbrOfContacts;
 };
 
-bool	areOnlyNumbers(std::string str);
+void	addPrompt(PhoneBook &phonebook);
 
 #endif

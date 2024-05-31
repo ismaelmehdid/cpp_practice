@@ -26,7 +26,7 @@ void	PhoneBook::addContact(Contact contact)
 	}
 }
 
-bool	areOnlyNumbers(std::string str)
+static bool	areOnlyDigits(std::string str)
 {
 	int length = str.length();
 	for (int i = 0; i < length; i++)
@@ -37,48 +37,94 @@ bool	areOnlyNumbers(std::string str)
 	return (true);
 }
 
-void	PhoneBook::showContacts() const
+static std::string truncate(std::string const str, size_t width)
 {
-	std::string	input;
+	if (str.length() > width)
+	{
+		return (str.substr(0, width - 1) + ".");
+	}
+	return (str);
+}
 
-	if (m_nbrOfContacts == 0)
-	{
-		std::cout << "You don't have contacts yet!" << std::endl;
-		return ;
-	}
-	std::cout << std::setw(10) << "Index" << "|" 
-			<< std::setw(10) << "First name" << "|" 
-			<< std::setw(10) << "Last name" << "|" 
-			<< std::setw(10) << "Nickname" << "|";
+void PhoneBook::displayContacts() const
+{
+    std::cout << std::setw(10) << "Index" << "|"
+			  << std::setw(10) << "First name" << "|" 
+              << std::setw(10) << "Last name" << "|" 
+              << std::setw(10) << "Nickname" << "|";
+    std::cout << std::endl;
+	for (int i = 0; i < 44; i++)
+		std::cout << "-";
 	std::cout << std::endl;
-	for (int i = 0; i < m_nbrOfContacts; i++)
+    for (int i = 0; i < m_nbrOfContacts; i++)
+    {
+        std::cout << std::setw(10) << i << "|";
+        std::cout << std::setw(10) << truncate(m_contacts[i].get_firstName(), 10) << "|";
+        std::cout << std::setw(10) << truncate(m_contacts[i].get_lastName(), 10) << "|";
+        std::cout << std::setw(10) << truncate(m_contacts[i].get_nickname(), 10) << "|";
+        std::cout << std::endl;
+    }
+}
+
+void PhoneBook::displayContactDetails(int index) const
+{
+    std::cout << "First name: " << m_contacts[index].get_firstName() << std::endl;
+    std::cout << "Last name: " << m_contacts[index].get_lastName() << std::endl;
+    std::cout << "Nickname: " << m_contacts[index].get_nickname() << std::endl;
+    std::cout << "Phone number: " << m_contacts[index].get_phoneNumber() << std::endl;
+    std::cout << "Darkest secret: " << m_contacts[index].get_darkestSecret() << std::endl;
+}
+
+void PhoneBook::promptForContact()
+{
+    std::string input;
+    do
+    {
+        std::cout << std::endl << "Write the index of the contact you want to display (write 'LEAVE' to exit SEARCH command) : ";
+        std::getline(std::cin, input);
+        std::cout << std::endl;
+        try {
+            if (!areOnlyDigits(input))
+            {
+                std::cout << "Bad input, make sure you type a number!" << std::endl;
+            }
+            else
+            {
+                int index = std::stoi(input);
+                if (index >= 0 && index < m_nbrOfContacts)
+                {
+                    displayContactDetails(index);
+                }
+                else
+                {
+                    std::cout << "Bad input, make sure your index exists!" << std::endl;
+                }
+            }
+        } catch (std::out_of_range& e) {
+            std::cout << "Error: Input is out of range for an integer. Please try again." << std::endl;
+        } catch (std::invalid_argument &e) {
+			std::cout << "Error: Your input is empty. Please try again." << std::endl;
+		}
+    } while (input != "LEAVE");
+}
+
+void	addPrompt(PhoneBook &phonebook)
+{
+    std::string fields[5] = {"First name", "Last name", "Nickname", "Phone number", "Darkest secret"};
+	std::string values[5];
+
+	for (int i = 0; i < 5; i++)
 	{
-		std::cout << std::setw(10) << i << "|";
-		std::cout << std::setw(10) << m_contacts[i].get_firstName() << "|";
-		std::cout << std::setw(10) << m_contacts[i].get_lastName() << "|";
-		std::cout << std::setw(10) << m_contacts[i].get_nickname() << "|";
-		std::cout << std::endl;
+		while (values[i].empty())
+		{
+			std::cout << fields[i] << ": ";
+			//std::cin >> values[i];				<- wait for a non void string
+			std::getline(std::cin, values[i]); //	<- take the whole line and take an empty one if it's the case
+			if (values[i].empty())
+			{
+				std::cout << "This field is mandatory!" << std::endl;
+			}
+		}
 	}
-	std::cin.ignore();
-	do
-	{
-		std::cout << std::endl << "Write the index of the contact you want to display (write 'LEAVE' to exit SEARCH command) : ";
-		//std::cin >> values[i];				<- wait for a non void string
-		std::getline(std::cin, input); //		<- take the whole line and take an empty one if it's the case
-		std::cout << std::endl;
-		int index = 0; // check if only digits 
-		if (!areOnlyNumbers(input) || !(stoi(input) >= 0 && stoi(input) < m_nbrOfContacts))
-		{
-			std::cout << "Bad input, make sure you type a number and that your index exist!" << std::endl;
-		}
-		else
-		{
-			index = stoi(input);
-			std::cout << m_contacts[index].get_firstName() << std::endl;
-			std::cout << m_contacts[index].get_lastName() << std::endl;
-			std::cout << m_contacts[index].get_nickname() << std::endl;
-			std::cout << m_contacts[index].get_phoneNumber() << std::endl;
-			std::cout << m_contacts[index].get_darkestSecret() << std::endl;
-		}
-	} while (input != "LEAVE");
+	phonebook.addContact(Contact(values[0], values[1], values[2], values[3], values[4]));
 }
