@@ -78,6 +78,7 @@ void PhoneBook::displayContactDetails(int index) const
 void PhoneBook::promptForContact()
 {
     std::string input;
+
     do
     {
         std::cout << std::endl << "Write the index of the contact you want to display (write 'LEAVE' to exit SEARCH command) : ";
@@ -107,6 +108,8 @@ void PhoneBook::promptForContact()
 		}
     } while (input != "LEAVE");
 }
+
+// Add prompt to add a phonebook
 
 void	addPrompt(PhoneBook &phonebook)
 {
