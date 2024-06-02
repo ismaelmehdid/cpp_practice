@@ -67,7 +67,7 @@ void	Account::_displayTimestamp( void )
               << std::setw(2) << std::setfill('0') << now_tm->tm_hour
               << std::setw(2) << std::setfill('0') << now_tm->tm_min
               << std::setw(2) << std::setfill('0') << now_tm->tm_sec
-        << ']';
+        << "] ";
 }
 
 void	Account::makeDeposit( int deposit )
