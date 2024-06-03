@@ -19,6 +19,6 @@ int main(void)
 	}
 
 	delete[] zombieArray; // call destructors on all zombies slots and free the memory of the array
-
+	zombieArray = nullptr;
 	return 0;
 }
