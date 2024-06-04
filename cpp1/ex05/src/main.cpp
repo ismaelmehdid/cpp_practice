@@ -8,10 +8,10 @@ int main(void)
 
 	for (int i = 0; i < 2; i++)
 	{
-		harl.complain("debug");
-		harl.complain("info");
-		harl.complain("warning");
-		harl.complain("error");
+		harl.complain("DEBUG");
+		harl.complain("INFO");
+		harl.complain("WARNING");
+		harl.complain("ERROR");
 		std::cout << '\n';
 	}
 	harl.complain("wtf");

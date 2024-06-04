@@ -8,20 +8,35 @@
 Harl::Harl() {}
 Harl::~Harl() {}
 
-void Harl::complain( std::string level )
+void Harl::complain(std::string filter)
 {
 	const std::string types[NBR_OF_COMPLAINS] = {"DEBUG", "INFO", "WARNING", "ERROR"};
-	void (Harl::*funcArray[NBR_OF_COMPLAINS])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
-
+	int levelNbr = -1;
 	for (int i = 0; i < NBR_OF_COMPLAINS; i++)
 	{
-		if (level == types[i])
+		if (types[i] == filter)
 		{
-			(this->*funcArray[i])(); // this-> keyword is a pointer pointing to his own object ex: Harl harl; Harl.complain() inside complain function this will point to harl object
-			return ;
+			levelNbr = i;
+			break ;
 		}
 	}
-	std::cout << "[????]\n???????????????????????????" << '\n';
+
+	switch (levelNbr) // fallthrough behavior
+	{
+		case 0:
+			debug();
+		case 1:
+			info();
+		case 2:
+			warning();
+		case 3:
+			error();
+			break;
+		default:
+			std::cout << "[ Probably complaining about insignificant problems ]" << '\n';
+			break;
+	}
+
 }
 
 void Harl::debug( void )
