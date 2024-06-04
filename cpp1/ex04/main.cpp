@@ -1,32 +1,75 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <streambuf>
+
+const int EXPECTED_ARG_COUNT = 4;
+
+static void searchAndReplace(std::string &str, const std::string &toReplace, const std::string &replacing)
+{
+	const size_t toReplaceLen = toReplace.length();
+	const size_t replacingLen = replacing.length();
+	size_t currentCursor = str.find(toReplace);
+
+	while (currentCursor != std::string::npos)
+	{
+		str.erase(currentCursor, toReplaceLen);
+		str.insert(currentCursor, replacing);
+		currentCursor = str.find(toReplace, currentCursor + replacingLen);
+	}
+}
+
+static bool openFile(const std::string &filename, std::ifstream &stream)
+{
+    stream.open("./" + filename, std::ios::binary);
+    if (!stream)
+    {
+        std::cout << "Error: Failed to open the file named '" << filename << "'" << std::endl;
+        return false;
+    }
+    return true;
+}
+
+static bool createFile(const std::string &filename, std::ofstream &stream)
+{
+    stream.open("./" + filename + ".replace", std::ios::binary);
+    if (!stream)
+    {
+        std::cout << "Error: Failed to create the file named '" << filename << ".replace'" << std::endl;
+        return false;
+    }
+    return true;
+}
 
 int main(int argc, char **argv)
 {
-	if (argc == 4)
+	if (argc == EXPECTED_ARG_COUNT)
 	{
-		std::string filename = argv[1]; //filename
-		std::string first = argv[2];
-		std::string second = argv[3];
-		std::string res = "";
-		std::ifstream oldFileStream("./" + filename, std::ios::binary); // open filename in readmode, std::ios::binary is reading bytes per bytes the content of the file so the OS don't convert some characters into anothers.
-		if (!oldFileStream)
-		{
-			std::cout << "Error: cannot open the file you specified" << std::endl;
-			return 1;
-		}
-		std::ofstream newFileStream("./" + filename + ".replace", std::ios::binary); // create filename
-		if (!newFileStream)
-		{
-			std::cout << "Error: cannot create the new file" << std::endl;
-			oldFileStream.close();
-			return 1;
-		}
-		newFileStream << oldFileStream.rdbuf();
+		const std::string filename = argv[1]; //filename
+		const std::string toReplace = argv[2];
+		const std::string replacing = argv[3];
+	
+		std::ifstream oldFileStream;
+		if (!openFile(filename, oldFileStream)) return 1;
+	
+		std::string str((std::istreambuf_iterator<char>(oldFileStream)), std::istreambuf_iterator<char>()); // iterator from the begining of the stream file to the end and store it in string
 		oldFileStream.close();
+
+		std::ofstream newFileStream;
+		if (!createFile(filename, newFileStream)) return 1;
+
+		if (toReplace == replacing)
+		{
+			newFileStream << str;
+			newFileStream.close();
+			std::cout << "Note: the two strings are the same so no replacement has been made" << std::endl;
+			return 0;
+		}
+		searchAndReplace(str, toReplace, replacing);
+		newFileStream << str;
 		newFileStream.close();
+		return 0;
 	}
-	std::cout << "Error: the program is should be use like so: ./ex04 filename string1 string2" << std::endl;
+	std::cout << "Error: the program is should be used like so: ./ex04 filename string1 string2" << std::endl;
 	return 1;
 }
