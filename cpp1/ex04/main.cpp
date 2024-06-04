@@ -3,7 +3,7 @@
 #include <iostream>
 #include <streambuf>
 
-const int EXPECTED_ARG_COUNT = 4;
+#define EXPECTED_ARG_COUNT 4
 
 static void searchAndReplace(std::string &str, const std::string &toReplace, const std::string &replacing)
 {
