@@ -16,14 +16,14 @@ Fixed::Fixed(const Fixed &toCopy)
 Fixed::Fixed(const int value)
 {
 	std::cout << "Int constructor called" << '\n';
-	fixedPointValue = value << fractionalBits;
+	fixedPointValue = value << fractionalBits; // converting int to FP nbr, we shift all bits to the right so we leave space for the decimal part
 }
 
 Fixed::Fixed(const float value)
 {
 	std::cout << "Float constructor called" << '\n';
-	float scaledValue = value * (1 << fractionalBits);
-    fixedPointValue = static_cast<int>(std::roundf(scaledValue));
+	float scaledValue = value * (1 << fractionalBits); // moving fractional bits from the decimal part to the whole number part
+    fixedPointValue = static_cast<int>(std::roundf(scaledValue)); //rouding up the value and casting it to int to store it in fixedpointvalue which is an int
 }
 
 Fixed::~Fixed()
@@ -52,16 +52,16 @@ Fixed &Fixed::operator=(const Fixed &fixed)
 
 float Fixed::toFloat(void) const
 {
-	return (static_cast<float>(fixedPointValue) / (1 << fractionalBits));
+	return (static_cast<float>(fixedPointValue) / (1 << fractionalBits)); // reverting the process of converting float to FP nbr, moving the bits from the whole number part to the decimal part
 }
 
 int Fixed::toInt(void) const
 {
-	return (fixedPointValue >> fractionalBits);
+	return (fixedPointValue >> fractionalBits); // invert the process of int to FP convertion, we bitshift all bits to the right 
 }
 
 std::ostream& operator<<(std::ostream &os, const Fixed &fixed)
 {
-	os << fixed.toFloat();
+	os << fixed.toFloat(); // converting the fixed point to float and puting the result in the output stream passed in parameter
 	return os;
 }
