@@ -2,6 +2,7 @@ NAME = ex01
 
 SRCS =	src/ClapTrap.cpp \
 		src/main.cpp \
+		src/ScavTrap.cpp
 
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98

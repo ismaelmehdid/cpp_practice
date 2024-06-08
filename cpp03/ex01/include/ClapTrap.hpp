@@ -12,7 +12,7 @@ class ClapTrap
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
 		void getStatus() const;
-	private:
+	protected:
 		std::string m_name;
 		int m_hp;
 		int m_energy;
