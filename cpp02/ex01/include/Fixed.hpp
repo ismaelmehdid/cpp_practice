@@ -7,17 +7,18 @@ class Fixed
 {
 	public:
 		Fixed();
+		~Fixed();
 		Fixed(const Fixed &toCopy);
 		Fixed(const int value);
 		Fixed(const float value);
 		float toFloat(void) const;
 		int toInt(void) const;
-		Fixed &operator=(const Fixed &fixed);
-		~Fixed();
 		int getRawBits(void) const;
 		void setRawBits(int const raw);
+		Fixed &operator=(const Fixed &fixed);
+
 	private:
-		int fixedPointValue;
+		int32_t fixedPointValue;
 		static const int fractionalBits = 8;
 };
 

@@ -23,7 +23,7 @@ Fixed::Fixed(const float value)
 {
 	std::cout << "Float constructor called" << '\n';
 	float scaledValue = value * (1 << fractionalBits); // moving fractional bits from the decimal part to the whole number part
-    fixedPointValue = static_cast<int>(std::roundf(scaledValue)); //rouding up the value and casting it to int to store it in fixedpointvalue which is an int
+    fixedPointValue = static_cast<int32_t>(std::roundf(scaledValue)); //rouding up the value and casting it to int to store it in fixedpointvalue which is an int
 }
 
 Fixed::~Fixed()
@@ -43,13 +43,6 @@ void Fixed::setRawBits(int const raw)
 	fixedPointValue = raw;
 }
 
-Fixed &Fixed::operator=(const Fixed &fixed)
-{
-	std::cout << "Copy assignment operator called" << '\n';
-	fixedPointValue = fixed.fixedPointValue;
-	return *this;
-}
-
 float Fixed::toFloat(void) const
 {
 	return (static_cast<float>(fixedPointValue) / (1 << fractionalBits)); // reverting the process of converting float to FP nbr, moving the bits from the whole number part to the decimal part
@@ -64,4 +57,11 @@ std::ostream& operator<<(std::ostream &os, const Fixed &fixed)
 {
 	os << fixed.toFloat(); // converting the fixed point to float and puting the result in the output stream passed in parameter
 	return os;
+}
+
+Fixed &Fixed::operator=(const Fixed &fixed)
+{
+	std::cout << "Copy assignment operator called" << '\n';
+	fixedPointValue = fixed.fixedPointValue;
+	return *this;
 }
