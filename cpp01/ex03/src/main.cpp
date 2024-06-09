@@ -1,13 +1,14 @@
-#include <iostream>
-#include <string>
-
 #include "../include/HumanA.hpp"
 #include "../include/HumanB.hpp"
 #include "../include/Weapon.hpp"
 
+#include <iostream>
+#include <string>
+
 int main( void )
 {
 	{
+		// reference so it's mandatory for the HumanA to have a weapon
 		Weapon club = Weapon("crude spiked club");
 		HumanA bob("Bob", club);
 		bob.attack();
@@ -15,6 +16,8 @@ int main( void )
 		bob.attack();
 	}
 	{
+		// pointer so it's not mandatory for the HumanB to have a weapon
+		// (either have one, or weapon object pointer set to 'nullptr')
 		Weapon club = Weapon("crude spiked club");
 		HumanB jim("Jim");
 		jim.setWeapon(club);

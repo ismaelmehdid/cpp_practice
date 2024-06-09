@@ -1,4 +1,4 @@
-NAME = human
+NAME = ex03
 
 SRCS =	src/HumanA.cpp \
 		src/HumanB.cpp \

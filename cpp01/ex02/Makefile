@@ -1,4 +1,4 @@
-NAME = zombie
+NAME = ex02
 
 SRCS = main.cpp
 
