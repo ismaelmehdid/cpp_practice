@@ -1,7 +1,8 @@
-#include <string>
-#include <iostream>
 #include "../include/PhoneBook.hpp"
 #include "../include/Contact.hpp"
+
+#include <string>
+#include <iostream>
 
 int main(void)
 {
@@ -17,11 +18,11 @@ int main(void)
 
 	while (input != "EXIT")
 	{
-		std::cout << std::endl;
-		std::cout << "Choose one of the 3 commands :" << std::endl;
-		std::cout << "ADD : To add a new contact to your phonebook." << std::endl;
-		std::cout << "SEARCH : To display all your contacts." << std::endl;
-		std::cout << "EXIT : To exit the program." << std::endl;
+		std::cout << '\n';
+		std::cout << "Choose one of the 3 commands :" << '\n';
+		std::cout << "ADD : To add a new contact to your phonebook." << '\n';
+		std::cout << "SEARCH : To display all your contacts." << '\n';
+		std::cout << "EXIT : To exit the program." << '\n';
 		std::cout << "Command: ";
 		std::getline(std::cin, input); //Take the whole line (exept the \n) and go to nextline (so no need to cin.ignore)
 		if (input == "ADD")
@@ -39,7 +40,7 @@ int main(void)
 		}
 		else
 		{
-			std::cout << "Wrong input, please try again." << std::endl;
+			std::cout << "Wrong input, please try again." << '\n';
 		}
 	}
 }
