@@ -9,12 +9,12 @@ class PhoneBook
 		PhoneBook();
 		void	addContact(Contact contact);
 		void	displayContacts() const;
-		void	displayContactDetails(int index) const;
 		void	promptForContact();
 		~PhoneBook();
 	private:
 		Contact m_contacts[8];
 		int		m_nbrOfContacts;
+		void	displayContactDetails(int index) const;
 };
 
 void	addPrompt(PhoneBook &phonebook);
