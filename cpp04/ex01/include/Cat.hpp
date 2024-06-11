@@ -14,6 +14,8 @@ class Cat : public Animal
 		void makeSound() const;
 		// overload operators
 		Cat &operator=(const Cat &cat);
+	private:
+		Brain *brain;
 };
 
 #endif

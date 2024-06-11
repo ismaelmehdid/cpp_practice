@@ -18,7 +18,6 @@ class Animal
 		Animal &operator=(const Animal &animal);
 	protected:
 		std::string type;
-		Brain *brain;
 };
 
 #endif

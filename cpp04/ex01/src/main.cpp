@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-#define NBR_OF_ANIMALS 100
+#define NBR_OF_ANIMALS 10
 
 int main()
 {
@@ -39,6 +39,11 @@ int main()
 	delete i;
 
 	std::cout << '\n';
+
+	Dog basic;
+	{
+		Dog tmp = basic;
+	}
 
 	return 0;
 }
