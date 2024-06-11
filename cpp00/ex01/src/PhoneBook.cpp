@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include <sstream>
 
 PhoneBook::PhoneBook() : m_nbrOfContacts(0)
 {
@@ -84,28 +85,28 @@ void PhoneBook::promptForContact()
         std::cout << std::endl << "Write the index of the contact you want to display (write 'LEAVE' to exit SEARCH command) : ";
         std::getline(std::cin, input);
         std::cout << std::endl;
-        try {
-            if (!areOnlyDigits(input))
+        if (!areOnlyDigits(input))
+        {
+             std::cout << "Bad input, make sure you type a number!" << std::endl;
+        }
+        else
+        {
+            int index;
+			std::istringstream iss(input);
+			if (!(iss >> index))
             {
-                std::cout << "Bad input, make sure you type a number!" << std::endl;
+                std::cout << "Bad input, put an index and make sure your number is not too large!" << std::endl;
+                continue;
+            }
+            if (index >= 0 && index < m_nbrOfContacts)
+            {
+                displayContactDetails(index);
             }
             else
             {
-                int index = std::stoi(input);
-                if (index >= 0 && index < m_nbrOfContacts)
-                {
-                    displayContactDetails(index);
-                }
-                else
-                {
-                    std::cout << "Bad input, make sure your index exists!" << std::endl;
-                }
+                std::cout << "Bad input, make sure your index exists!" << std::endl;
             }
-        } catch (std::out_of_range& e) {
-            std::cout << "Error: Input is out of range for an integer. Please try again." << std::endl;
-        } catch (std::invalid_argument &e) {
-			std::cout << "Error: Your input is empty. Please try again." << std::endl;
-		}
+        }
     } while (input != "LEAVE");
 }
 

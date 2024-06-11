@@ -1,5 +1,4 @@
 #include <iostream>
-#include <chrono>
 #include <iomanip>
 #include "Account.hpp"
 
@@ -55,8 +54,8 @@ int		Account::getNbWithdrawals( void )
 
 void	Account::_displayTimestamp( void )
 {
-	std::time_t now = std::time(0);
-    std::tm *now_tm = std::localtime(&now);
+	time_t now = time(0);
+    tm *now_tm = localtime(&now);
 	
 	    std::cout
 		<< '['
