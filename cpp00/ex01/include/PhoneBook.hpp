@@ -9,7 +9,7 @@ class PhoneBook
 		PhoneBook();
 		void	addContact(Contact contact);
 		void	displayContacts() const;
-		void	promptForContact();
+		int		promptForContact();
 		~PhoneBook();
 	private:
 		Contact m_contacts[8];
@@ -17,6 +17,6 @@ class PhoneBook
 		void	displayContactDetails(int index) const;
 };
 
-void	addPrompt(PhoneBook &phonebook);
+int	addPrompt(PhoneBook &phonebook);
 
 #endif

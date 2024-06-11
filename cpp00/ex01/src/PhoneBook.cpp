@@ -18,7 +18,7 @@ void	PhoneBook::addContact(Contact contact)
 {
 	if (m_nbrOfContacts == 8)
 	{
-		m_contacts[7] = contact;
+		m_contacts[0] = contact;
 	}
 	else
 	{
@@ -76,18 +76,20 @@ void PhoneBook::displayContactDetails(int index) const
     std::cout << "Darkest secret: " << m_contacts[index].get_darkestSecret() << std::endl;
 }
 
-void PhoneBook::promptForContact()
+int PhoneBook::promptForContact()
 {
     std::string input;
 
     do
     {
         std::cout << std::endl << "Write the index of the contact you want to display (write 'LEAVE' to exit SEARCH command) : ";
-        std::getline(std::cin, input);
+        if (std::getline(std::cin, input).eof())
+			return 1;
         std::cout << std::endl;
         if (!areOnlyDigits(input))
         {
-             std::cout << "Bad input, make sure you type a number!" << std::endl;
+			if (input != "LEAVE")
+            	std::cout << "Bad input, make sure you type a number!" << std::endl;
         }
         else
         {
@@ -104,15 +106,16 @@ void PhoneBook::promptForContact()
             }
             else
             {
-                std::cout << "Bad input, make sure your index exists!" << std::endl;
+                	std::cout << "Bad input, make sure your index exists!" << std::endl;
             }
         }
     } while (input != "LEAVE");
+	return 0;
 }
 
 // Add prompt to add a phonebook
 
-void	addPrompt(PhoneBook &phonebook)
+int	addPrompt(PhoneBook &phonebook)
 {
     std::string fields[5] = {"First name", "Last name", "Nickname", "Phone number", "Darkest secret"};
 	std::string values[5];
@@ -122,8 +125,11 @@ void	addPrompt(PhoneBook &phonebook)
 		while (values[i].empty())
 		{
 			std::cout << fields[i] << ": ";
-			//std::cin >> values[i];				<- wait for a non void string
-			std::getline(std::cin, values[i]); //	<- take the whole line and take an empty one if it's the case
+			//std::cin >> values[i];							<- wait for a non void string
+			if (std::getline(std::cin, values[i]).eof())  //	<- take the whole line and take an empty one if it's the case
+			{
+				return 1;
+			}
 			if (values[i].empty())
 			{
 				std::cout << "This field is mandatory!" << std::endl;
@@ -131,4 +137,5 @@ void	addPrompt(PhoneBook &phonebook)
 		}
 	}
 	phonebook.addContact(Contact(values[0], values[1], values[2], values[3], values[4]));
+	return 0;
 }

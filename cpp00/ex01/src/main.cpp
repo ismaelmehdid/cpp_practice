@@ -24,15 +24,20 @@ int main(void)
 		std::cout << "SEARCH : To display all your contacts." << '\n';
 		std::cout << "EXIT : To exit the program." << '\n';
 		std::cout << "Command: ";
-		std::getline(std::cin, input); //Take the whole line (exept the \n) and go to nextline (so no need to cin.ignore)
+		if (std::getline(std::cin, input).eof()) //Take the whole line (exept the \n) and go to nextline (so no need to cin.ignore)
+		{
+			return 0;
+		}
 		if (input == "ADD")
 		{
-			addPrompt(phonebook);
+			if (addPrompt(phonebook) != 0)
+				return 0;
 		}
 		else if (input == "SEARCH")
 		{
 			phonebook.displayContacts();
-			phonebook.promptForContact();
+			if (phonebook.promptForContact() != 0)
+				return 0;
 		}
 		else if (input == "EXIT")
 		{
