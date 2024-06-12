@@ -9,8 +9,6 @@ int Account::_totalNbWithdrawals = 0;
 
 Account::Account( int initial_deposit )
 {
-	//index:0;amount:42;created
-
 	_displayTimestamp();
 	_accountIndex = _nbAccounts;
 	_totalAmount += initial_deposit;
@@ -27,7 +25,6 @@ Account::Account( int initial_deposit )
 Account::~Account( void )
 {
 	_displayTimestamp();
-	//[19920104_091532] index:7;amount:8942;closed
 	std::cout << "index:" << _accountIndex << ";";
 	std::cout << "amount:" << _amount << ";closed" << std::endl;
 }
@@ -71,7 +68,6 @@ void	Account::_displayTimestamp( void )
 
 void	Account::makeDeposit( int deposit )
 {
-	//[19920104_091532] index:0;p_amount:42;deposit:5;amount:47;nb_deposits:1
 	_displayTimestamp();
 	std::cout << "index:" << _accountIndex << ";";
 	std::cout << "p_amount:" << _amount << ";";
@@ -86,7 +82,6 @@ void	Account::makeDeposit( int deposit )
 
 bool	Account::makeWithdrawal( int withdrawal )
 {
-	//[19920104_091532] index:0;p_amount:47;withdrawal:refused
 	_displayTimestamp();
 	if (withdrawal > _amount)
 	{
@@ -95,9 +90,6 @@ bool	Account::makeWithdrawal( int withdrawal )
 		std::cout << "withdrawal:refused" << std::endl;
 		return false;
 	}
-
-	//[19920104_091532] index:1;p_amount:819;withdrawal:34;amount:785;nb_withdrawals:1
-
 	std::cout << "index:" << _accountIndex << ";";
 	std::cout << "p_amount:" << _amount << ";";
 	std::cout << "withdrawal:" << withdrawal << ";";
@@ -118,7 +110,6 @@ int		Account::checkAmount( void ) const
 void	Account::displayStatus( void ) const
 {
 	_displayTimestamp();
-	//index:0;amount:42;deposits:0;withdrawals:0
 	std::cout << "index:" << _accountIndex << ";";
 	std::cout << "amount:" << _amount << ";";
 	std::cout << "deposits:" << _nbDeposits << ";";
@@ -128,7 +119,6 @@ void	Account::displayStatus( void ) const
 void	Account::displayAccountsInfos( void )
 {
 	_displayTimestamp();
-	// [19920104_091532] accounts:8;total:20049;deposits:0;withdrawals:0
 	std::cout << "accounts:" << _nbAccounts << ";";
 	std::cout << "total:" << _totalAmount << ";";
 	std::cout << "deposits:" << _totalNbDeposits << ";";
