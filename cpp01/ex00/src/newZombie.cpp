@@ -4,5 +4,5 @@
 
 Zombie*	newZombie( std::string name )
 {
-	return (new Zombie(name));
+	return (new (std::nothrow) Zombie(name)); // don't throw an exception if an allocation fail
 }

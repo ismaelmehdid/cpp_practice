@@ -23,13 +23,17 @@ int main(void)
 	Zombie *foo = newZombie("foo");
 	Zombie *bar = newZombie("bar");
 
-	foo->announce();
-	bar->announce();
-
-	delete foo;
-	foo = nullptr;
-	delete bar;
-	bar = nullptr;
-
+	if (foo != 0)
+	{
+		foo->announce();
+		delete foo;
+		foo = 0;
+	}
+	if (bar != 0)
+	{
+		bar->announce();
+		delete bar;
+		bar = 0;
+	}
 	return 0;
 }
