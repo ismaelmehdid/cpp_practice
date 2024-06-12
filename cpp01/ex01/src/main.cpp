@@ -11,14 +11,15 @@ int main(void)
 
 	int nbrOfZombies = 10;
 	Zombie *zombieArray = zombieHorde(nbrOfZombies, "foo");
-
-	for (int i = 0; i < nbrOfZombies; i++)
+	if (zombieArray != 0)
 	{
-		std::cout << i + 1 << ": ";
-		zombieArray[i].announce();
+		for (int i = 0; i < nbrOfZombies; i++)
+		{
+			std::cout << i + 1 << ": ";
+			zombieArray[i].announce();
+		}
+		delete[] zombieArray; // call destructors on all zombies slots and free the memory of the array
+		zombieArray = 0;
 	}
-
-	delete[] zombieArray; // call destructors on all zombies slots and free the memory of the array
-	zombieArray = nullptr;
 	return 0;
 }
