@@ -4,7 +4,7 @@
 #include <iomanip>
 #include <sstream>
 
-PhoneBook::PhoneBook() : m_nbrOfContacts(0)
+PhoneBook::PhoneBook() : m_nbrOfContacts(0), m_currentIndex(0)
 {
 	for (int i = 0; i < 8; i++)
 	{
@@ -16,13 +16,9 @@ PhoneBook::~PhoneBook() {}
 
 void	PhoneBook::addContact(Contact contact)
 {
-	if (m_nbrOfContacts == 8)
-	{
-		m_contacts[0] = contact;
-	}
-	else
-	{
-		m_contacts[m_nbrOfContacts] = contact;
+	m_contacts[m_currentIndex] = contact;
+	m_currentIndex = (m_currentIndex + 1) % 8;
+	if (m_nbrOfContacts < 8){
 		m_nbrOfContacts++;
 	}
 }
@@ -32,7 +28,7 @@ static bool	areOnlyDigits(std::string str)
 	int length = str.length();
 	for (int i = 0; i < length; i++)
 	{
-		if (isdigit(str[i]) == false)
+		if (str[i] < '0' || str[i] > '9')
 			return (false);
 	}
 	return (true);
@@ -95,7 +91,7 @@ int PhoneBook::promptForContact()
         {
             int index;
 			std::istringstream iss(input);
-			if (!(iss >> index))
+			if (!(iss >> index)) // extraction of an integer from iss stream
             {
                 std::cout << "Bad input, put an index and make sure your number is not too large!" << std::endl;
                 continue;

@@ -14,6 +14,7 @@ class PhoneBook
 	private:
 		Contact m_contacts[8];
 		int		m_nbrOfContacts;
+		int		m_currentIndex;
 		void	displayContactDetails(int index) const;
 };
 
