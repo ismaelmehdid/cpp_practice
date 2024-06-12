@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 		int length = str.size();
 		for (int j = 0; j < length; j++)
 		{
-			std::cout << (char)std::toupper(str.at(j));
+			std::cout << (char)std::toupper(str[j]);
 		}
 	}
 	std::cout << '\n';
