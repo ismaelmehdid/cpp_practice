@@ -21,10 +21,8 @@ int main( void )
 
 	std::cout << std::endl;
 
-	Fixed test(42);
-	std::cout << test.getRawBits() << std::endl;
-
-
+	Fixed test(3.14f);
+	std::cout << test.toFloat() << std::endl; //3.14062 bcz of precision waste -> 3.14 * 256 ≈ 803 -> 803 / 256 = 3.14062
 
 	return 0;
 }
