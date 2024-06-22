@@ -34,5 +34,5 @@ Fixed &Fixed::operator=(const Fixed &fixed)
 {
 	std::cout << "Copy assignment operator called" << '\n';
 	m_nbrValue = fixed.m_nbrValue;
-	return *this;
+	return *this; // for b = c = a -> c = a return a reference to c so it can be used in b = c 
 }
