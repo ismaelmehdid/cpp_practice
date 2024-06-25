@@ -56,5 +56,15 @@ int main(void)
 		bob.attack("cat");
 		bob.guardGate();
 	}
+	std::cout << "=====---------------------------------------=====" << std::endl;
+	std::cout << "=====------- Gate Keeper Mode Test ---------=====" << std::endl;
+	std::cout << "=====---------------------------------------=====" << std::endl;
+	{
+		ScavTrap bob("bob");
+		bob.guardGate();
+		bob.guardGate();
+		bob.guardGate();
+		bob.getStatus();
+	}
 	return 0;
 }

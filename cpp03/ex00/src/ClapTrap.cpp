@@ -12,6 +12,24 @@ ClapTrap::~ClapTrap()
 	std::cout << "ClapTrap named " << m_name << " left the game!" << '\n';
 }
 
+ClapTrap::ClapTrap(const ClapTrap &toCopy) : m_name(toCopy.m_name), m_hp(toCopy.m_hp), m_energy(toCopy.m_energy), m_attackDamages(toCopy.m_attackDamages)
+{
+
+}
+
+ClapTrap &ClapTrap::operator=(const ClapTrap &toCopy)
+{
+	if (&toCopy == this)
+	{
+		return *this;
+	}
+	m_name = toCopy.m_name;
+	m_hp = toCopy.m_hp;
+	m_energy = toCopy.m_energy;
+	m_attackDamages = toCopy.m_attackDamages;
+	return *this;
+}
+
 void ClapTrap::attack(const std::string& target)
 {
 	if (m_hp == 0)

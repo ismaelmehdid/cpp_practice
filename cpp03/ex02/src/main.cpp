@@ -59,8 +59,16 @@ int main(void)
 		bob.attack("cat");
 		bob.guardGate();
 	}
-
-	
+	std::cout << "=====---------------------------------------=====" << std::endl;
+	std::cout << "=====------- Gate Keeper Mode Test ---------=====" << std::endl;
+	std::cout << "=====---------------------------------------=====" << std::endl;
+	{
+		ScavTrap bob("bob");
+		bob.guardGate();
+		bob.guardGate();
+		bob.guardGate();
+		bob.getStatus();
+	}
 	std::cout << "=====---------------FragTrap----------------=====" << std::endl;
 	std::cout << "=====---------------------------------------=====" << std::endl;
 	std::cout << "=====------------ Energy tests -------------=====" << std::endl;
@@ -85,7 +93,9 @@ int main(void)
 		bob.attack("cat");
 		bob.beRepaired(9999);
 		bob.attack("cat");
-
+		bob.highFivesGuys();
+		bob.highFivesGuys();
+		bob.highFivesGuys();
 	}
 	return 0;
 }
