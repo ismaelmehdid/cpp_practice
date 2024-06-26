@@ -2,6 +2,11 @@
 
 #include <iostream>
 
+ClapTrap::ClapTrap() : m_name("undefined_name"), m_hp(0), m_energy(0), m_attackDamages(0)
+{
+
+}
+
 ClapTrap::ClapTrap(std::string name) : m_name(name), m_hp(10), m_energy(10), m_attackDamages(0)
 {
 	std::cout << "A new ClapTrap named " << name << " spawned!" << '\n';

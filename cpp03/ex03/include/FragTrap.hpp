@@ -5,12 +5,12 @@
 
 #include <string>
 
-class FragTrap : public ClapTrap
+class FragTrap : virtual public ClapTrap // virtual keyword so it doesn't include the instance of ClapTrap twice
 {
 	public:
 		FragTrap();
 		FragTrap(std::string name);
-		~FragTrap();
+		virtual ~FragTrap();
 		FragTrap(const FragTrap &toCopy);
 		void attack(const std::string& target);
 		void takeDamage(unsigned int amount);

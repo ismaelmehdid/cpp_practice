@@ -2,13 +2,21 @@
 
 #include <string>
 #include <iostream>
-		
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name), _gateMode(false)
+
+ScavTrap::ScavTrap() : ClapTrap()
+{
+	m_hp = 100;
+	m_energy = 50;
+	m_attackDamages = 20;
+}
+
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
 	std::cout << "A new ScavTrap named " << name << " spawned!" << '\n';
 	m_hp = 100;
 	m_energy = 50;
 	m_attackDamages = 20;
+	_gateMode = false;
 }
 
 ScavTrap::~ScavTrap()
