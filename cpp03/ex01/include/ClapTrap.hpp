@@ -1,5 +1,4 @@
-#ifndef ClapTrap_Hpp
-#define ClapTrap_Hpp
+#pragma once
 
 #include <string>
 
@@ -11,9 +10,9 @@ class ClapTrap
 		ClapTrap(const ClapTrap &toCopy);
 		virtual ~ClapTrap();
 		virtual void attack(const std::string& target);
-		virtual void takeDamage(unsigned int amount);
-		virtual void beRepaired(unsigned int amount);
-		virtual void getStatus() const;
+		void takeDamage(unsigned int amount);
+		void beRepaired(unsigned int amount);
+		void getStatus() const;
 		ClapTrap &operator=(const ClapTrap &toCopy);
 	protected:
 		std::string m_name;
@@ -21,5 +20,3 @@ class ClapTrap
 		int m_energy;
 		int m_attackDamages;
 };
-
-#endif

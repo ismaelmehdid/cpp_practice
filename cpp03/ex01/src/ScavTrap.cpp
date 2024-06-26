@@ -5,9 +5,11 @@
 		
 ScavTrap::ScavTrap() : ClapTrap()
 {
+	std::cout << "A new ScavTrap named " << m_name << " spawned!" << '\n';
 	m_hp = 100;
 	m_energy = 50;
 	m_attackDamages = 20;
+	_gateMode = false;
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
@@ -26,16 +28,16 @@ ScavTrap::~ScavTrap()
 
 ScavTrap::ScavTrap(const ScavTrap &toCopy) : ClapTrap(toCopy)
 {
-
+	std::cout << "A new ScavTrap named " << m_name << " spawned!" << '\n';
+	_gateMode = toCopy._gateMode;
 }
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &toCopy)
 {
-	if (this == &toCopy) {
-		return *this;
+	if (this != &toCopy) {
+		ClapTrap::operator=(toCopy);
+		_gateMode = toCopy._gateMode;
 	}
-	ClapTrap::operator=(toCopy);
-	_gateMode = toCopy._gateMode;
 	return *this;
 }
 
@@ -53,36 +55,6 @@ void ScavTrap::attack(const std::string& target)
 	}
 	m_energy--;
 	std::cout << "ScavTrap " << m_name << " attacks " << target << ", causing " << m_attackDamages << " points of damage!" << '\n';
-}
-
-void ScavTrap::takeDamage(unsigned int amount)
-{
-	if (amount > (unsigned int)m_hp)
-		std::cout << "ScavTrap " << m_name << " lost " << m_hp << " hp!" << '\n';
-	else
-		std::cout << "ScavTrap " << m_name << " lost " << amount << " hp!" << '\n';
-	m_hp -= amount;
-	if (m_hp < 0)
-		m_hp = 0;
-}
-
-void ScavTrap::beRepaired(unsigned int amount)
-{
-	if (m_energy == 0)
-	{
-		std::cout << "You are too tired!" << '\n';
-		return ;
-	}
-	if (amount + m_hp > 100)
-		std::cout << "ScavTrap " << m_name << " got repaired and gained " << 100 - m_hp << " hp" << '\n';
-	else
-		std::cout << "ScavTrap " << m_name << " got repaired and gained " << amount << " hp" << '\n';
-	m_energy--;
-	m_hp += amount;
-	if (m_hp > 100)
-	{
-		m_hp = 100;
-	}
 }
 
 void ScavTrap::getStatus() const

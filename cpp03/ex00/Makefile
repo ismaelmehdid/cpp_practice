@@ -1,4 +1,4 @@
-NAME = ex01
+NAME = ex00
 
 SRCS =	src/ClapTrap.cpp \
 		src/main.cpp \

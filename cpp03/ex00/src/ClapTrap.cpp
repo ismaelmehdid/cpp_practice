@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-ClapTrap::ClapTrap() : m_name("undefined_name"), m_hp(0), m_energy(0), m_attackDamages(0)
+ClapTrap::ClapTrap() : m_name("undefined_name"), m_hp(10), m_energy(10), m_attackDamages(0)
 {
-
+	std::cout << "A new ClapTrap named " << m_name << " spawned!" << '\n';
 }
 
 ClapTrap::ClapTrap(std::string name) : m_name(name), m_hp(10), m_energy(10), m_attackDamages(0)
@@ -19,19 +19,18 @@ ClapTrap::~ClapTrap()
 
 ClapTrap::ClapTrap(const ClapTrap &toCopy) : m_name(toCopy.m_name), m_hp(toCopy.m_hp), m_energy(toCopy.m_energy), m_attackDamages(toCopy.m_attackDamages)
 {
-
+	std::cout << "A new ClapTrap named " << m_name << " spawned!" << '\n';
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &toCopy)
 {
-	if (&toCopy == this)
+	if (&toCopy != this)
 	{
-		return *this;
+		m_name = toCopy.m_name;
+		m_hp = toCopy.m_hp;
+		m_energy = toCopy.m_energy;
+		m_attackDamages = toCopy.m_attackDamages;
 	}
-	m_name = toCopy.m_name;
-	m_hp = toCopy.m_hp;
-	m_energy = toCopy.m_energy;
-	m_attackDamages = toCopy.m_attackDamages;
 	return *this;
 }
 

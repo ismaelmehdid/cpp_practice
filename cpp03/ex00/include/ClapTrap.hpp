@@ -1,5 +1,4 @@
-#ifndef ClapTrap_Hpp
-#define ClapTrap_Hpp
+#pragma once
 
 #include <string>
 
@@ -21,5 +20,3 @@ class ClapTrap
 		int m_energy;
 		int m_attackDamages;
 };
-
-#endif

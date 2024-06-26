@@ -1,5 +1,4 @@
-#ifndef ScavTrap_Hpp
-#define ScavTrap_Hpp
+#pragma once
 
 #include "ClapTrap.hpp"
 
@@ -13,8 +12,6 @@ class ScavTrap : public ClapTrap
 		~ScavTrap();
 		ScavTrap(const ScavTrap &toCopy);
 		void attack(const std::string& target);
-		void takeDamage(unsigned int amount);
-		void beRepaired(unsigned int amount);
 		void getStatus() const;
 		void guardGate();
 		ScavTrap &operator=(const ScavTrap &toCopy);
@@ -22,4 +19,3 @@ class ScavTrap : public ClapTrap
 		bool _gateMode;
 };
 
-#endif

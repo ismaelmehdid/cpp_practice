@@ -1,5 +1,4 @@
-#ifndef FragTrap_Hpp
-#define FragTrap_Hpp
+#pragma once
 
 #include "ClapTrap.hpp"
 
@@ -13,11 +12,7 @@ class FragTrap : public ClapTrap
 		~FragTrap();
 		FragTrap(const FragTrap &toCopy);
 		void attack(const std::string& target);
-		void takeDamage(unsigned int amount);
-		void beRepaired(unsigned int amount);
 		void getStatus() const;
 		void highFivesGuys(void);
 		FragTrap &operator=(const FragTrap &toCopy);
 };
-
-#endif
