@@ -5,6 +5,8 @@
 
 #define INVENTORY_SLOTS 4
 
+#include <string>
+
 class Character : public ICharacter
 {
 	public:

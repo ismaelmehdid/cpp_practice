@@ -2,6 +2,8 @@
 
 #include <string>
 
+class ICharacter;
+
 class AMateria
 {
 	protected:

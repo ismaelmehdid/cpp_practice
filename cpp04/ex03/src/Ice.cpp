@@ -8,7 +8,13 @@ Ice::~Ice() {}
 
 Ice::Ice(const Ice &toCopy) : AMateria(toCopy) {}
 
-Ice &Ice::operator=(const Ice &toCopy) {}
+Ice &Ice::operator=(const Ice &toCopy)
+{
+	if (this != &toCopy) {
+		_type = toCopy._type;
+	}
+	return *this;
+}
 
 Ice *Ice::clone() const
 {
@@ -17,5 +23,5 @@ Ice *Ice::clone() const
 
 void Ice::use(ICharacter& target)
 {
-	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
+	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }

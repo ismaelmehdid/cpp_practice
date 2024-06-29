@@ -9,7 +9,15 @@ MateriaSource::MateriaSource()
 	}
 }
 
-MateriaSource::~MateriaSource() {}
+MateriaSource::~MateriaSource()
+{
+	for (int i = 0; i < BAG_CAPACITY; i++) {
+		if (_bag[i] != NULL) {
+			delete _bag[i];
+			_bag[i] = NULL;
+		}
+	}
+}
 
 MateriaSource::MateriaSource(const MateriaSource &toCopy)
 {
@@ -42,12 +50,18 @@ MateriaSource &MateriaSource::operator=(const MateriaSource &toCopy)
 
 void MateriaSource::learnMateria(AMateria* m)
 {
+	if (!m) {
+		std::cout << "Materia you want to learn is empty!" << std::endl;
+		return ;
+	}
 	for (int i = 0; i < BAG_CAPACITY; i++) {
 		if (_bag[i] == NULL) {
 			_bag[i] = m;
 			return ;
 		}
 	}
+	delete m;
+	m = NULL;
 	std::cout << "No slots left in MateriaSource couldn't learn a new Materia!" << std::endl;
 }
 

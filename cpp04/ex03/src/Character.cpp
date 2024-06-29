@@ -5,7 +5,15 @@
 
 Character::Character() : _name("undefined_name") {}
 
-Character::~Character() {}
+Character::~Character()
+{
+	for (int i = 0; i < INVENTORY_SLOTS; i++) {
+		if (_inventory[i] != NULL) {
+			delete _inventory[i];
+			_inventory[i] = NULL;
+		}
+	}
+}
 
 Character::Character(const std::string &name) : _name(name)
 {

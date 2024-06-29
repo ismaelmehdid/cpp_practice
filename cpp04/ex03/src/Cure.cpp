@@ -8,7 +8,13 @@ Cure::~Cure() {}
 
 Cure::Cure(const Cure &toCopy) : AMateria(toCopy) {}
 
-Cure &Cure::operator=(const Cure &toCopy) {}
+Cure &Cure::operator=(const Cure &toCopy)
+{
+	if (this != &toCopy) {
+		_type = toCopy._type;
+	}
+	return *this;
+}
 
 Cure *Cure::clone() const
 {
@@ -17,5 +23,5 @@ Cure *Cure::clone() const
 
 void Cure::use(ICharacter& target)
 {
-	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
+	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }
