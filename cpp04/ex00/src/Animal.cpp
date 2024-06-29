@@ -29,11 +29,15 @@ void Animal::makeSound() const
 
 Animal::Animal(const Animal &animal)
 {
-	*this = animal;
+	if (this != &animal) {
+		*this = animal;
+	}
 }
 
 Animal &Animal::operator=(const Animal &animal)
 {
-	type = animal.type;
+	if (this != &animal) {
+		type = animal.type;
+	}
 	return *this;
 }

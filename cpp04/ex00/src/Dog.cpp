@@ -15,7 +15,9 @@ Dog::~Dog()
 
 Dog::Dog(const Dog &dog)
 {
-	*this = dog;
+	if (this != &dog) {
+		*this = dog;
+	}
 }
 
 void Dog::makeSound() const
@@ -25,6 +27,8 @@ void Dog::makeSound() const
 
 Dog &Dog::operator=(const Dog &dog)
 {
-	type = dog.type;
+	if (this != &dog) {
+		type = dog.type;	
+	}
 	return *this;
 }

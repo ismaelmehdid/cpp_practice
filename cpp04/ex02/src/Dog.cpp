@@ -17,8 +17,10 @@ Dog::~Dog()
 
 Dog::Dog(const Dog &dog)
 {
-	brain = new Brain(*dog.brain);
-	type = dog.type;
+	if (this != &dog) {
+		brain = new Brain(*dog.brain);
+		type = dog.type;
+	}
 }
 
 void Dog::makeSound() const
@@ -37,4 +39,9 @@ Dog &Dog::operator=(const Dog &dog)
 	type = dog.type;
 
 	return *this;
+}
+
+void Dog::printBrainAddr() const
+{
+	std::cout << brain << std::endl;
 }

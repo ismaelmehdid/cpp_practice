@@ -12,6 +12,7 @@ class Cat : public Animal
 		~Cat();
 		Cat(const Cat &cat);
 		void makeSound() const;
+		void printBrainAddr() const;
 		// overload operators
 		Cat &operator=(const Cat &cat);
 	private:

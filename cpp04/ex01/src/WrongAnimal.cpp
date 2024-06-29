@@ -29,11 +29,16 @@ void WrongAnimal::makeSound() const
 
 WrongAnimal::WrongAnimal(const WrongAnimal &wrong_animal)
 {
-	*this = wrong_animal;
+	if (this != &wrong_animal) {
+		*this = wrong_animal;
+	}
 }
 
 WrongAnimal &WrongAnimal::operator=(const WrongAnimal &wrong_animal)
 {
-	type = wrong_animal.type;
+	if (this != &wrong_animal) {
+		type = wrong_animal.type;
+	}
 	return *this;
 }
+

@@ -15,7 +15,9 @@ WrongCat::~WrongCat()
 
 WrongCat::WrongCat(const WrongCat &wrong_cat)
 {
-	*this = wrong_cat;
+	if (this != &wrong_cat) {
+		*this = wrong_cat;
+	}
 }
 
 void WrongCat::makeSound() const
@@ -25,6 +27,8 @@ void WrongCat::makeSound() const
 
 WrongCat &WrongCat::operator=(const WrongCat &wrong_cat)
 {
-	type = wrong_cat.type;
+	if (this != &wrong_cat) {
+		type = wrong_cat.type;
+	}
 	return *this;
 }

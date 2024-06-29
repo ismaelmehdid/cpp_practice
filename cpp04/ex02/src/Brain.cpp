@@ -18,14 +18,17 @@ Brain::~Brain()
 
 Brain::Brain(const Brain &brain)
 {
-	*this = brain;
+	if (this != &brain) {
+		*this = brain;
+	}
 }
 
 Brain &Brain::operator=(const Brain &brain)
 {
-	for (int i = 0; i < NBR_IDEAS; i++)
-	{
-		ideas[i] = brain.ideas[i];
+	if (this != &brain) {
+		for (int i = 0; i < NBR_IDEAS; i++) {
+			ideas[i] = brain.ideas[i];
+		}
 	}
 	return *this;
 }

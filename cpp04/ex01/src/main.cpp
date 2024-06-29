@@ -40,10 +40,27 @@ int main()
 
 	std::cout << '\n';
 
-	Dog basic;
+	std::cout << "Copy tests:" << std::endl;
 	{
-		Dog tmp = basic;
-	}
+		{
+			Dog one = Dog();
+			Dog two = Dog(one);
 
+			std::cout << "Dog one brain address:";
+			one.printBrainAddr();
+			std::cout << "Dog two brain address:";
+			two.printBrainAddr();
+		}
+		std::cout << std::endl;
+		{
+			Cat three = Cat();
+			Cat four = three;
+
+			std::cout << "Cat three brain address:";
+			three.printBrainAddr();
+			std::cout << "Cat four brain address:";
+			four.printBrainAddr();
+		}
+	}
 	return 0;
 }

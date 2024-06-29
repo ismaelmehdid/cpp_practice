@@ -7,7 +7,7 @@ class WrongAnimal
 {
 	public:
 		WrongAnimal();
-		~WrongAnimal();
+		virtual ~WrongAnimal();
 		WrongAnimal(const std::string &custom_type);
 		WrongAnimal(const WrongAnimal &wrong_animal);
 		std::string getType() const;

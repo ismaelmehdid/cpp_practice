@@ -15,7 +15,9 @@ Cat::~Cat()
 
 Cat::Cat(const Cat &cat)
 {
-	*this = cat;
+	if (this != &cat) {
+		*this = cat;
+	}
 }
 
 void Cat::makeSound() const
@@ -25,6 +27,8 @@ void Cat::makeSound() const
 
 Cat &Cat::operator=(const Cat &cat)
 {
-	type = cat.type;
+	if (this != &cat) {
+		type = cat.type;
+	}
 	return *this;
 }

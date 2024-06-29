@@ -17,8 +17,10 @@ Cat::~Cat()
 
 Cat::Cat(const Cat &cat)
 {
-	brain = new Brain(*cat.brain);
-	type = cat.type;
+	if (this != &cat) {
+		brain = new Brain(*cat.brain);
+		type = cat.type;
+	}
 }
 
 void Cat::makeSound() const
@@ -30,11 +32,16 @@ Cat &Cat::operator=(const Cat &cat)
 {
 	if (this == &cat)
 		return *this;
-	
+
 	delete brain;
 
 	brain = new Brain(*cat.brain);
 	type = cat.type;
 
 	return *this;
+}
+
+void Cat::printBrainAddr() const
+{
+	std::cout << brain << std::endl;
 }
