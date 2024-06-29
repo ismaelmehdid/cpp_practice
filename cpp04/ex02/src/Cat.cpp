@@ -20,6 +20,7 @@ Cat::Cat(const Cat &cat)
 	if (this != &cat) {
 		brain = new Brain(*cat.brain);
 		type = cat.type;
+		std::cout << "A cat has been created." << '\n';
 	}
 }
 

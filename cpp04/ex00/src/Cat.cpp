@@ -17,6 +17,7 @@ Cat::Cat(const Cat &cat)
 {
 	if (this != &cat) {
 		*this = cat;
+		std::cout << "A cat has been created." << '\n';
 	}
 }
 

@@ -20,6 +20,7 @@ Dog::Dog(const Dog &dog)
 	if (this != &dog) {
 		brain = new Brain(*dog.brain);
 		type = dog.type;
+		std::cout << "A Dog has been created." << '\n';
 	}
 }
 

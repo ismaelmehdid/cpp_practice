@@ -20,6 +20,7 @@ Brain::Brain(const Brain &brain)
 {
 	if (this != &brain) {
 		*this = brain;
+		std::cout << "A brain has been created." << '\n';
 	}
 }
 

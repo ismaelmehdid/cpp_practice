@@ -17,6 +17,7 @@ Dog::Dog(const Dog &dog)
 {
 	if (this != &dog) {
 		*this = dog;
+		std::cout << "A Dog has been created." << '\n';
 	}
 }
 
