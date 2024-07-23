@@ -21,7 +21,7 @@ static void searchAndReplace(std::string &str, const std::string &toReplace, con
 
 static bool openFile(const std::string &filename, std::ifstream &stream)
 {
-    stream.open("./" + filename, std::ios::binary);
+    stream.open(("./" + filename).c_str(), std::ios::binary);
     if (!stream)
     {
         std::cout << "Error: Failed to open the file named '" << filename << "'" << '\n';
@@ -38,7 +38,7 @@ static bool openFile(const std::string &filename, std::ifstream &stream)
 
 static bool createFile(const std::string &filename, std::ofstream &stream)
 {
-    stream.open("./" + filename + ".replace", std::ios::binary);
+    stream.open(("./" + filename + ".replace").c_str(), std::ios::binary);
     if (!stream)
     {
         std::cout << "Error: Failed to create the file named '" << filename << ".replace'" << '\n';

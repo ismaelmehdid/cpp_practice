@@ -1,6 +1,7 @@
 #include "../include/Fixed.hpp"
 
 #include <iostream>
+#include <cmath>
 
 Fixed::Fixed() : fixedPointValue(0)
 {
@@ -23,7 +24,7 @@ Fixed::Fixed(const float value)
 {
 	std::cout << "Float constructor called" << '\n';
 	float scaledValue = value * (1 << fractionalBits); //can't bitshift with float so *256
-    fixedPointValue = static_cast<int32_t>(std::roundf(scaledValue));
+    fixedPointValue = static_cast<int32_t>(roundf(scaledValue));
 }
 
 Fixed::~Fixed()

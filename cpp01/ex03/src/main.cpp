@@ -25,5 +25,11 @@ int main( void )
 		club.setType("some other type of club");
 		jim.attack();
 	}
+	{
+		// no weapon test
+		HumanB jim("Jim");
+		jim.attack();
+		jim.attack();
+	}
 	return 0;
 }

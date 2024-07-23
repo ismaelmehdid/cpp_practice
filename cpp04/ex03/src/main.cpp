@@ -53,24 +53,26 @@ int main()
 		me->equip(cure);
 		me->equip(cure);
 		me->equip(cure);
-		me->equip(cure); // no slots available in inv 
+		me->equip(cure); // already equipped
 
 		std::cout << std::endl;
 		std::cout << "Copy tests:" << std::endl;
 
-		Character toCopy = Character("toCopy"); // = overload
-		toCopy.equip(cure);
-		Character newCopy = toCopy;
+		AMateria *cureCpy = new Cure();
+		Character toCopy = Character("toCopy"); 
+		toCopy.equip(cureCpy);
+		Character newCopy = toCopy;// = overload
 		std::cout << newCopy.getName() << std::endl;
 		newCopy.use(0, *bob);
 
-		Character bob2 = Character("bob2"); // copy constructor
-		bob2.equip(ice);
-		Character copyBob2 = Character(bob2);
+		AMateria *iceCpy = new Ice();
+		Character bob2 = Character("bob2"); 
+		bob2.equip(iceCpy);
+		Character copyBob2 = Character(bob2);// copy constructor
 		std::cout << copyBob2.getName() << std::endl;
 		copyBob2.use(0, bob2);
 		
-
+		
 		delete bob;
 		delete me;
 		delete src;

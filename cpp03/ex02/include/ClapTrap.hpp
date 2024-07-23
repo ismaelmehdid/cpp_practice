@@ -12,7 +12,7 @@ class ClapTrap
 		virtual void attack(const std::string& target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
-		void getStatus() const;
+		virtual void getStatus() const;
 		ClapTrap &operator=(const ClapTrap &toCopy);
 	protected:
 		std::string m_name;

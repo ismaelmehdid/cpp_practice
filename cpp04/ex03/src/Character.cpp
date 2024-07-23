@@ -3,7 +3,12 @@
 
 #include <iostream>
 
-Character::Character() : _name("undefined_name") {}
+Character::Character() : _name("undefined_name")
+{
+	for (int i = 0; i < INVENTORY_SLOTS; i++) {
+		_inventory[i] = NULL;
+	}
+}
 
 Character::~Character()
 {
@@ -61,6 +66,14 @@ void Character::equip(AMateria* m)
 {
 	int i = 0;
 	
+	while (i < INVENTORY_SLOTS) {
+		if (_inventory[i] == m) {
+			std::cout << "Item already equipped!" << std::endl;
+			return ;
+		}
+		i++;
+	}
+	i = 0;
 	while (i < INVENTORY_SLOTS) {
 		if (_inventory[i] == NULL) {
 			_inventory[i] = m;

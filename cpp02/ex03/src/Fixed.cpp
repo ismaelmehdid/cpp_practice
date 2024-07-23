@@ -20,7 +20,7 @@ Fixed::Fixed(const int value)
 Fixed::Fixed(const float value)
 {
 	float scaledValue = value * (1 << fractionalBits);
-    fixedPointValue = static_cast<int>(std::roundf(scaledValue));
+    fixedPointValue = static_cast<int>(roundf(scaledValue));
 }
 
 Fixed::~Fixed()
