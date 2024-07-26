@@ -11,11 +11,9 @@ Bureaucrat::Bureaucrat(const std::string &name, int grade) throw(GradeTooHighExc
 {
 	if (grade > 150) {
 		throw GradeTooLowException();
-		return ;
 	}
 	else if (grade < 1) {
 		throw GradeTooHighException();
-		return ;
 	}
 	std::cout << "A bureaucrat named " << _name << " with grade " << _grade << " has been created." << std::endl;
 }
@@ -52,7 +50,6 @@ void Bureaucrat::promote() throw(GradeTooHighException)
 {
 	if (_grade - 1 < 1) {
 		throw GradeTooHighException();
-		return ;
 	}
 	_grade--;
 }
@@ -61,7 +58,6 @@ void Bureaucrat::demote() throw(GradeTooLowException)
 {
 	if (_grade + 1 > 150) {
 		throw GradeTooLowException();
-		return ;
 	}
 	_grade++;
 }

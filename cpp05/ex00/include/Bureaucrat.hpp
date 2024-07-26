@@ -31,13 +31,13 @@ class Bureaucrat
 		Bureaucrat &operator=(const Bureaucrat &bureaucrat);
 
 		std::string getName() const;
-		int			getGrade() const;
-		void		promote() throw(GradeTooHighException);
-		void		demote() throw(GradeTooLowException);
+		int         getGrade() const;
+		void        promote() throw(GradeTooHighException);
+		void        demote() throw(GradeTooLowException);
 
 	private:
-		const std::string	_name;
-		int					_grade;
+		const std::string   _name;
+		int                 _grade;
 };
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat);
