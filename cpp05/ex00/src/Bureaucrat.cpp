@@ -7,9 +7,16 @@ Bureaucrat::Bureaucrat() : _name("no_name"), _grade(150)
 	std::cout << "A bureaucrat named 'no_name' with grade 150 has been created." << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name), _grade(grade)
+Bureaucrat::Bureaucrat(const std::string &name, int grade) throw(GradeTooHighException, GradeTooLowException) : _name(name), _grade(grade)
 {
-	// check for errors and throw exception
+	if (grade > 150) {
+		throw GradeTooLowException();
+		return ;
+	}
+	else if (grade < 1) {
+		throw GradeTooHighException();
+		return ;
+	}
 	std::cout << "A bureaucrat named " << _name << " with grade " << _grade << " has been created." << std::endl;
 }
 
@@ -34,7 +41,6 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &bureaucrat)
 	return *this;
 }
 
-
 std::string Bureaucrat::getName() const
 {
 	return _name;
@@ -45,19 +51,26 @@ int Bureaucrat::getGrade() const
 	return _grade;
 }
 
-void Bureaucrat::promote()
+void Bureaucrat::promote() throw(GradeTooHighException)
 {
-	// check for errors and throw exception
+	if (_grade - 1 < 1) {
+		throw GradeTooHighException();
+		return ;
+	}
 	_grade--;
 }
 
-void Bureaucrat::demote()
+void Bureaucrat::demote() throw(GradeTooLowException)
 {
-	// check for errors and throw exception	
+	if (_grade + 1 > 150) {
+		throw GradeTooLowException();
+		return ;
+	}
 	_grade++;
 }
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat)
 {
 	os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << "." << std::endl;
+	return os;
 }
