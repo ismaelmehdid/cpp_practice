@@ -20,12 +20,9 @@ Bureaucrat::Bureaucrat(const std::string &name, int grade) throw(GradeTooHighExc
 	std::cout << "A bureaucrat named " << _name << " with grade " << _grade << " has been created." << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat)
+Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat) : _name(bureaucrat._name), _grade(bureaucrat._grade)
 {
-	if (this != &bureaucrat) {
-		*this = bureaucrat;
-		std::cout << "A bureaucrat named " << _name << " with grade " << _grade << " has been created." << std::endl;
-	}
+	std::cout << "A bureaucrat named " << _name << " with grade " << _grade << " has been created." << std::endl;
 }
 
 Bureaucrat::~Bureaucrat()
