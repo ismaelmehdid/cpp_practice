@@ -75,7 +75,7 @@ std::ostream &operator<<(std::ostream &os, const Form &form)
 {
 	os << form.getName() <<
     (form.isSigned() ? " (signed)" : " (not signed)") <<
-    ", bureaucrat signing grade " << form.getSigningGrade() <<
+    ", signing grade " << form.getSigningGrade() <<
     ", execution grade " << form.getExecutionGrade() <<
     "." << std::endl;
 	return os;
