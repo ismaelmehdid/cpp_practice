@@ -17,6 +17,7 @@ _name(name), _signed(false), _sign_grade(sign_grade), _execute_grade(execute_gra
 	else if (sign_grade > 150 || execute_grade > 150) {
 		throw GradeTooLowException();
 	}
+    std::cout << "A form named " << _name << " with a signing grade of " << _sign_grade << " and an executing grade of " << _execute_grade << " has been created." << std::endl;
 }
 
 Form::Form(const Form &form) : _name(form._name), _signed(form._signed), _sign_grade(form._sign_grade), _execute_grade(form._execute_grade)

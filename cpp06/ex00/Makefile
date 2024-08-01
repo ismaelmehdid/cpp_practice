@@ -1,9 +1,7 @@
-NAME = ex01
+NAME = ex00
 
-SRCS =	src/Bureaucrat.cpp \
-		src/AForm.cpp \
-		src/main.cpp \
-		src/PresidentialPardonForm.cpp \
+SRCS =	src/main.cpp \
+		src/ScalarConverter.cpp
 
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98

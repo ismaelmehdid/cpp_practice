@@ -2,7 +2,7 @@
 
 #include <string>
 #include <iostream>
-#include "Form.hpp"
+#include "AForm.hpp"
 
 class Bureaucrat
 {
@@ -35,7 +35,7 @@ class Bureaucrat
 		int			getGrade() const;
 		void		promote() throw(GradeTooHighException);
 		void		demote() throw(GradeTooLowException);
-        void        signForm(Form &form) const;
+        void        signForm(AForm &form) const;
 
 	private:
 		const std::string	_name;
