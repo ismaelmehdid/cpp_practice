@@ -1,4 +1,5 @@
 #include "../include/Bureaucrat.hpp"
+#include "../include/AForm.hpp"
 
 #include <iostream>
 
@@ -76,4 +77,24 @@ void Bureaucrat::signForm(AForm &form) const
     } catch (std::exception &e) {
         std::cout << _name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
     }
+}
+
+void Bureaucrat::executeForm(AForm const & form)
+{
+    try {
+        form.execute(*this);
+        std::cout << _name << " executed " << form.getName() << std::endl;
+    } catch (std::exception &e) {
+        std::cerr << _name << " could not execute the form because: " << e.what() << std::endl;    
+    }
+}
+
+const char *Bureaucrat::GradeTooHighException::what() const throw()
+{
+    return "Bureaucrat Grade too high!";
+}
+
+const char *Bureaucrat::GradeTooLowException::what() const throw()
+{
+    return "Bureaucrat Grade too low!";
 }

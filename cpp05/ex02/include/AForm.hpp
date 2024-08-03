@@ -1,34 +1,26 @@
 #pragma once
 
+#include "Bureaucrat.hpp"
+
 #include <string>
 
-class Bureaucrat;
 class AForm
 {
 	public:
 		class GradeTooHighException : public std::exception
 		{
 			public:
-				virtual const char *what() const throw()
-				{
-					return "Grade too high!";
-				}
+				const char *what() const throw();
 		};
 		class GradeTooLowException : public std::exception
 		{
 			public:
-				virtual const char *what() const throw()
-				{
-					return "Grade too low!";
-				}
+				const char *what() const throw();
 		};
 		class FormNotSignedException : public std::exception
 		{
 			public:
-				virtual const char *what() const throw()
-				{
-					return "The form is not signed!";
-				}
+				const char *what() const throw();
 		};
 		AForm();
 		AForm(const std::string &name, const int sign_grade, const int execute_grade) throw(GradeTooHighException, GradeTooLowException);
@@ -40,10 +32,12 @@ class AForm
         bool                isSigned() const;
         int                 getSigningGrade() const;
         int                 getExecutionGrade() const;
-        void                beSigned(const Bureaucrat &bureaucrat) throw(GradeTooLowException);
-        virtual void        execute(Bureaucrat const & executor) const throw(GradeTooLowException, FormNotSignedException) = 0;
+        void                beSigned(const Bureaucrat &bureaucrat) throw(Bureaucrat::GradeTooLowException);
+        void                execute(Bureaucrat const & executor) const throw(Bureaucrat::GradeTooLowException, FormNotSignedException);
 
-	protected:
+    protected:
+        virtual void        executeForm(void) const = 0;
+	private:
 		const std::string	_name;
 		bool				_signed;
 		const int			_sign_grade;	// grade required to sign it

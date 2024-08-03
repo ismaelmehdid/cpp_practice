@@ -4,6 +4,8 @@ SRCS =	src/Bureaucrat.cpp \
 		src/AForm.cpp \
 		src/main.cpp \
 		src/PresidentialPardonForm.cpp \
+		src/ShrubberyCreationForm.cpp \
+		src/RobotomyRequestForm.cpp \
 
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98

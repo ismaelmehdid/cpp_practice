@@ -2,8 +2,8 @@
 
 #include <string>
 #include <iostream>
-#include "AForm.hpp"
 
+class AForm;
 class Bureaucrat
 {
 	public:
@@ -11,18 +11,12 @@ class Bureaucrat
 		class GradeTooHighException : public std::exception
 		{
 			public:
-				virtual const char *what() const throw()
-				{
-					return "Grade too high!";
-				}
+				const char *what() const throw();
 		};
 		class GradeTooLowException : public std::exception
 		{
 			public:
-				virtual const char *what() const throw()
-				{
-					return "Grade too low!";
-				}
+				const char *what() const throw();
 		};
 
 		Bureaucrat();
@@ -36,6 +30,7 @@ class Bureaucrat
 		void		promote() throw(GradeTooHighException);
 		void		demote() throw(GradeTooLowException);
         void        signForm(AForm &form) const;
+        void        executeForm(AForm const & form);
 
 	private:
 		const std::string	_name;

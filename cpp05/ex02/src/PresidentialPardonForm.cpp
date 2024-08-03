@@ -3,26 +3,31 @@
 
 #include <iostream>
 
-PresidentialPardonForm::PresidentialPardonForm() : AForm(), _target("no_name")
+#define PRESIDENTIAL_SIGN_GRADE 25
+#define PRESIDENTIAL_EXECUTE_GRADE 5
+
+PresidentialPardonForm::PresidentialPardonForm() throw(GradeTooHighException, GradeTooLowException)
+: AForm("Presidential Pardon", PRESIDENTIAL_SIGN_GRADE, PRESIDENTIAL_EXECUTE_GRADE), _target("no_name")
 {
     std::cout << "A 'Presidential Pardon Form' with a target named 'no_name' has been created." << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const std::string &name, const int sign_grade, const int execute_grade, std::string &target) throw(GradeTooHighException, GradeTooLowException)
-: AForm(name, sign_grade, execute_grade), _target(target)
+PresidentialPardonForm::PresidentialPardonForm(const std::string &name, const std::string &target) throw(GradeTooHighException, GradeTooLowException)
+: AForm(name, PRESIDENTIAL_SIGN_GRADE, PRESIDENTIAL_EXECUTE_GRADE), _target(target)
 {
     std::cout << "A 'Presidential Pardon Form' named " << 
-	_name << ", with a target named " << _target << ", a signing grade of " << 
-	_sign_grade << " and an executing grade of " << 
-	_execute_grade << " has been created." << std::endl;
+	getName() << ", with a target named " << _target << ", a signing grade of " << 
+	getSigningGrade() << " and an executing grade of " << 
+	getExecutionGrade() << " has been created." << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &presidential_pardon_form) : AForm(presidential_pardon_form._name, presidential_pardon_form._sign_grade, presidential_pardon_form._execute_grade), _target(presidential_pardon_form._target)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &presidential_pardon_form)
+: AForm(presidential_pardon_form.getName(), presidential_pardon_form.getSigningGrade(), presidential_pardon_form.getExecutionGrade()), _target(presidential_pardon_form._target)
 {
     std::cout << "A 'Presidential Pardon Form' named " << 
-	_name << ", with a target named " << _target << ", a signing grade of " << 
-	_sign_grade << " and an executing grade of " << 
-	_execute_grade << " has been created." << std::endl;
+	getName() << ", with a target named " << _target << ", a signing grade of " << 
+	getSigningGrade() << " and an executing grade of " << 
+	getExecutionGrade() << " has been created." << std::endl;
 }
 
 PresidentialPardonForm::~PresidentialPardonForm()
@@ -39,13 +44,7 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPard
     return *this;
 }
 
-void PresidentialPardonForm::execute(Bureaucrat const & executor) const throw(GradeTooLowException, FormNotSignedException)
+void PresidentialPardonForm::executeForm(void) const
 {
-    if (!_signed) {
-        throw AForm::FormNotSignedException();
-    }
-    if (executor.getGrade() > _execute_grade) {
-        throw AForm::GradeTooLowException();
-    }
     std::cout << _target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
