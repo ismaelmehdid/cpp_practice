@@ -1,4 +1,4 @@
-NAME = ex02
+NAME = ex03
 
 SRCS =	src/Bureaucrat.cpp \
 		src/AForm.cpp \
@@ -6,6 +6,7 @@ SRCS =	src/Bureaucrat.cpp \
 		src/PresidentialPardonForm.cpp \
 		src/ShrubberyCreationForm.cpp \
 		src/RobotomyRequestForm.cpp \
+		src/Intern.cpp 
 
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
