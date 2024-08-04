@@ -32,7 +32,7 @@ class AForm
         bool                isSigned() const;
         int                 getSigningGrade() const;
         int                 getExecutionGrade() const;
-        void                beSigned(const Bureaucrat &bureaucrat) throw(Bureaucrat::GradeTooLowException);
+        void                beSigned(const Bureaucrat &bureaucrat) throw(GradeTooLowException);
         void                execute(Bureaucrat const & executor) const throw(Bureaucrat::GradeTooLowException, FormNotSignedException);
 
     protected:

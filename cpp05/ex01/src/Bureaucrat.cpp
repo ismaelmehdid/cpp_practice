@@ -1,4 +1,5 @@
 #include "../include/Bureaucrat.hpp"
+#include "../include/Form.hpp"
 
 #include <iostream>
 
@@ -76,4 +77,14 @@ void Bureaucrat::signForm(Form &form) const
     } catch (std::exception &e) {
         std::cout << _name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
     }
+}
+
+const char *Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return "Bureaucrat Grade too high!";
+}
+
+const char *Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return "Bureaucrat Grade too low!";
 }

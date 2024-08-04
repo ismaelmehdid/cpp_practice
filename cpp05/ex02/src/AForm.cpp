@@ -64,10 +64,10 @@ int AForm::getExecutionGrade() const
     return _execute_grade;
 }
 
-void AForm::beSigned(const Bureaucrat &bureaucrat) throw(Bureaucrat::GradeTooLowException)
+void AForm::beSigned(const Bureaucrat &bureaucrat) throw(GradeTooLowException)
 {
     if (bureaucrat.getGrade() > _sign_grade) {
-        throw Bureaucrat::GradeTooLowException();
+        throw GradeTooLowException();
     }
     _signed = true;
 }
