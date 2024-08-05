@@ -2,25 +2,14 @@
 
 #include <iostream>
 #include <string>
+#include <regex>
 
-static void convert_string_and_display(std::string &str)
-{
-    std::cout << "char: ";
-    try {
-        int res = std::stoi(str);
-    } catch (std::exception &e){
-        std::cout << "impossible" << std::endl;
-    }
-    if (res < 0 || res > 127) {
-        std::cout << "impossible" << std::endl;
-    } else if (res >= 0 && res <= 31) {
-        std::cout << "Non displayable" << std::endl;
-    } else {
-        std::cout << (char)res << std::endl;
-    }
-}
 
 void ScalarConverter::convert(std::string &str)
 {
-    convert_string_and_display(str);
+    (void)str;
+    std::regex charRegex("(-[0-9]*\\.[0-9]+)");
+    std::regex intRegex("");
+    std::regex floatRegex("");
+    std::regex doubleRegex("");
 }

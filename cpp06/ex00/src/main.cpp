@@ -2,6 +2,12 @@
 
 #include <iostream>
 
+
+// 1. Get the type of the value passed in string with regex
+// 2. Static cast to the good type to display the value in the right format
+
+
+
 int main(int argc, char **argv)
 {
     if (argc == 2) {
