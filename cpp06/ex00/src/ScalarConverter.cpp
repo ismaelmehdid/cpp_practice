@@ -2,28 +2,45 @@
 
 #include <iostream>
 #include <string>
-#include <regex.h>
 
-#define CHAR_REGEX ""
-#define INT_REGEX ""
-#define FLOAT_REGEX ""
-#define DOUBLE_REGEX ""
+enum scalar_type {
+    SCALAR_CHAR,
+    SCALAR_INT,
+    SCALAR_FLOAT,
+    SCALAR_DOUBLE
+} t_scalar_type ;
 
-
-void ScalarConverter::convert(std::string &str)
+static void print_of_unknown_scalar_type()
 {
-    (void)str;
-    regex_t charRegex;
-    regex_t intRegex;
-    regex_t floatRegex;
-    regex_t doubleRegex;
+    std::cout << "char: impossible" << std::endl;
+    std::cout << "int: impossible" << std::endl;
+    std::cout << "float: impossible" << std::endl;
+    std::cout << "double: impossible" << std::endl;
+}
 
-    if (regcomp(&charRegex, CHAR_REGEX, 0) != 0 ||
-        regcomp(&intRegex, INT_REGEX, 0) != 0 ||
-        regcomp(&floatRegex, FLOAT_REGEX, 0) != 0 ||
-        regcomp(&doubleRegex, DOUBLE_REGEX, 0) != 0)
+static scalar_type get_scalar_type(const std::string &str)
+{
+    if (str == "-inff" || str == "+inff" || str == "nanf")
+        return (SCALAR_FLOAT);
+    if (str == "-inf" || str == "+inf" || str == "nan")
+        return (SCALAR_DOUBLE);
+}
+
+void ScalarConverter::convert(const std::string &str)
+{
+    scalar_type scalar_type = get_scalar_type(str);
+    switch (scalar_type)
     {
-        std::cerr << "Error while compiling regex" << std::endl;
-        return ;
+        case SCALAR_CHAR:
+            break;
+        case SCALAR_INT:
+            break;
+        case SCALAR_FLOAT:
+            break;
+        case SCALAR_DOUBLE:
+            break;
+        default:
+            print_of_unknown_scalar_type();
+            return ;
     }
 }
