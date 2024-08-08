@@ -4,7 +4,11 @@
 
 class ScalarConverter
 {
-    //TODO: canonical form
     public:
         static void convert(const std::string &str);
+    private:
+        ScalarConverter();
+        ~ScalarConverter();
+        ScalarConverter(const ScalarConverter &toCopy);
+        ScalarConverter &operator=(const ScalarConverter &toCopy);
 };

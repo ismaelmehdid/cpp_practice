@@ -12,6 +12,25 @@ enum scalar_type {
     SCALAR_UNKNOWN
 } t_scalar_type ;
 
+//===----------------------------------------------------------------------===//
+
+ScalarConverter::ScalarConverter() { }
+
+ScalarConverter::~ScalarConverter() { }
+
+ScalarConverter::ScalarConverter(const ScalarConverter &toCopy)
+{
+    (void)toCopy;
+}
+
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &toCopy)
+{
+    (void)toCopy;
+    return *this;
+}
+
+//===----------------------------------------------------------------------===//
+
 static void print_impossible()
 {
     std::cout << "char: impossible" << std::endl;
