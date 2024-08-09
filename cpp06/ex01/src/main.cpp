@@ -13,7 +13,7 @@ int main(void)
 
     uintptr_t serialized = Serializer::serialize(&data);
 
-    std::cout << "data adress value: " << &data << std::endl;
+    std::cout << "data address value: " << &data << std::endl;
     std::cout << "serialized value: " << serialized << std::endl;
     
     struct Data *deserialized = Serializer::deserialize(serialized);

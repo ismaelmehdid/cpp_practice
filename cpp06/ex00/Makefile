@@ -3,7 +3,7 @@ NAME = convert
 SRCS =	src/main.cpp \
 		src/ScalarConverter.cpp
 
-CC = c++
+CC = c++ -g
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
 RM = rm -rf
