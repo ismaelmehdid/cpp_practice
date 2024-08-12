@@ -1,6 +1,7 @@
 #include "../include/swap_min_max.hpp"
 
 #include <iostream>
+#include <string>
 
 int main( void )
 {
@@ -53,6 +54,16 @@ int main( void )
         std::cout << "After -> c = " << c << ", d = " << d << std::endl;
         std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
         std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+
+        std::cout << std::endl;
+
+        std::string e = "hello";
+        std::string f = "bob";
+        std::cout << "Before -> e = " << e << ", f = " << f << std::endl;
+        ::swap( e, f );
+        std::cout << "After -> e = " << e << ", f = " << f << std::endl;
+        std::cout << "min( e, f ) = " << ::min( e, f ) << std::endl;
+        std::cout << "max( e, f ) = " << ::max( e, f ) << std::endl;
     }
     //===----------------------------------------------------------------------===//
     std::cout << "\033[31m//===" << std::string(70, '-') << "===//\033[0m" << std::endl;
