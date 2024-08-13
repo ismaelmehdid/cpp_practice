@@ -1,6 +1,7 @@
 #include "../include/Array.hpp"
 
 #include <iostream>
+#include <stdlib.h>
 #define MAX_VAL 750
 
 int main(void)
@@ -61,13 +62,13 @@ int main(void)
     std::cout << "\033[31m//===" << std::string(70, '-') << "===//\033[0m" << std::endl;
     //===-----------------------------------------------------===//
 
-    Array<std::string> emptyStringArray = Array<std::string>(0); // empty array test
+    Array<std::string> emptyStringArray(0); // empty array test
 
     //===-----------------------------------------------------===//
     std::cout << "\033[31m//    Array with empty strings test\033[0m" << std::endl;
     //===-----------------------------------------------------===//
 
-    Array<std::string> stringArray = Array<std::string>(5);
+    Array<std::string> stringArray(5);
     for (int i = 0; i < 5; i++) {
         std::cout << stringArray[i] << std::endl;
     }

@@ -5,10 +5,10 @@ Array<T>::Array() : _length(1)
 {
     try {
         _array = new T[1];
-        _array[0] = T();
+        _array[0] = T(); // default initializer (0 for int)
     } catch (std::bad_alloc &e) {
         std::cerr << "Failed to allocate memory: " << e.what() << std::endl;
-        _array = nullptr;
+        _array = NULL;
     }
     //std::cout << "A default array has been created." << std::endl;
 }
@@ -23,7 +23,7 @@ Array<T>::Array(unsigned int n) : _length(n)
         }
     } catch (std::bad_alloc &e) {
         std::cerr << "Failed to allocate memory: " << e.what() << std::endl;
-        _array = nullptr;
+        _array = NULL;
     }
 
     //std::cout << "An array of size " << _length << " has been created" << std::endl
@@ -40,7 +40,7 @@ Array<T>::Array(const Array &toCopy) : _length(toCopy._length)
             }
         } catch (std::bad_alloc &e) {
             std::cerr << "Failed to allocate memory: " << e.what() << std::endl;
-            _array = nullptr;
+            _array = NULL;
         }
     }
     //std::cout << "Array copy constructor called." << std::endl;
