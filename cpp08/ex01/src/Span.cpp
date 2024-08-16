@@ -11,23 +11,21 @@ bool Span::_seeded = false;
 //                       Constructors/Destructor
 //===----------------------------------------------------------------------===//
 
-Span::Span() : _nbrOfElements(0), _currentIndex(0)
+Span::Span() : _nbrOfElements(0), _currentIndex(0), _vector(std::vector<int>())
 {
     if (!_seeded) {
         srand(time(NULL));
         _seeded = true;
     }
-    _vector.resize(0);
     std::cout << "An empty span has been created." << std::endl;
 }
 
-Span::Span(unsigned int n) : _nbrOfElements(n), _currentIndex(0)
+Span::Span(unsigned int n) : _nbrOfElements(n), _currentIndex(0), _vector(std::vector<int>(n))
 {
     if (!_seeded) {
         srand(time(0));
         _seeded = true;
     }
-    _vector.resize(n);
     std::cout << "A span of size " << n << " has been created." << std::endl;
 }
 
@@ -57,13 +55,13 @@ void Span::addNumber(int n) throw(TooManyElements)
 
 int Span::shortestSpan() throw(NoSpanCanBeFound)
 {
-    if (_currentIndex < 1) {
+    if (_currentIndex < 2) {
         throw NoSpanCanBeFound();
     }
     std::vector<int> sorted = _vector;
     std::sort(sorted.begin(), sorted.end());
 
-    std::vector<int> all_differences(sorted.size() - 1);
+    std::vector<int> all_differences(sorted.size());
     std::adjacent_difference(sorted.begin(), sorted.end(), all_differences.begin()); // compute all difference in the sorted array
 
     //all_differences.begin() + 1 as the first difference is sorted[0] - sorted[0]
@@ -74,7 +72,7 @@ int Span::shortestSpan() throw(NoSpanCanBeFound)
 
 int Span::longestSpan() throw(NoSpanCanBeFound)
 {
-    if (_currentIndex < 1) {
+    if (_currentIndex < 2) {
         throw NoSpanCanBeFound();
     }
 
@@ -87,7 +85,7 @@ int Span::longestSpan() throw(NoSpanCanBeFound)
 void    Span::fill_random(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
     for (std::vector<int>::iterator it = begin; it != end; it++) {
-        *it = rand();
+        *it = rand() - RAND_MAX / 2;
     }
     _currentIndex = _vector.size() - 1;
 }

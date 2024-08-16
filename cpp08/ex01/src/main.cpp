@@ -39,6 +39,21 @@ int main(void)
 
     //===----------------------------------------------------------------------===//
     std::cout << "\033[31m//===" << std::string(70, '-') << "===//\033[0m" << std::endl;
+    std::cout << "\033[31m//    Not enough elements test\033[0m" << std::endl;
+    std::cout << "\033[31m//===" << std::string(70, '-') << "===//\033[0m" << std::endl;
+    //===----------------------------------------------------------------------===//
+
+    try {
+        Span notEnough = Span(1);
+        notEnough.addNumber(3);
+        std::cout << notEnough.shortestSpan() << std::endl;
+        std::cout << notEnough.longestSpan() << std::endl;
+    } catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
+
+    //===----------------------------------------------------------------------===//
+    std::cout << "\033[31m//===" << std::string(70, '-') << "===//\033[0m" << std::endl;
     std::cout << "\033[31m//    Span member functions tests\033[0m" << std::endl;
     std::cout << "\033[31m//===" << std::string(70, '-') << "===//\033[0m" << std::endl;
     //===----------------------------------------------------------------------===//
@@ -50,9 +65,16 @@ int main(void)
     std::cout << "Longest span: " << spanTest.longestSpan() << std::endl;
 
     //===----------------------------------------------------------------------===//
+    std::cout << "\033[31m//===" << std::string(70, '-') << "===//\033[0m" << std::endl;
+    std::cout << "\033[31m//    Big span test\033[0m" << std::endl;
+    std::cout << "\033[31m//===" << std::string(70, '-') << "===//\033[0m" << std::endl;
+    //===----------------------------------------------------------------------===//
 
-    //Span makeMeLag(1000000);
-    //makeMeLag.fill_random(makeMeLag.begin(), makeMeLag.end());
+    Span makeMeLag(100000000);
+    makeMeLag.fill_random(makeMeLag.begin(), makeMeLag.end());
     //makeMeLag.display();
+    std::cout << "Shortest span: " << makeMeLag.shortestSpan() << std::endl;
+    std::cout << "Longest span: " << makeMeLag.longestSpan() << std::endl;
 
+    //===----------------------------------------------------------------------===//
 }
