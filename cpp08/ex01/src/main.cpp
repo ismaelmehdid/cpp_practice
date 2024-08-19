@@ -70,7 +70,7 @@ int main(void)
     std::cout << "\033[31m//===" << std::string(70, '-') << "===//\033[0m" << std::endl;
     //===----------------------------------------------------------------------===//
 
-    Span makeMeLag(100000000);
+    Span makeMeLag(1000000);
     makeMeLag.fill_random(makeMeLag.begin(), makeMeLag.end());
     //makeMeLag.display();
     std::cout << "Shortest span: " << makeMeLag.shortestSpan() << std::endl;

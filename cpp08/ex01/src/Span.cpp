@@ -3,7 +3,9 @@
 #include <vector>
 #include <iostream>
 #include <numeric>
+#include <stdlib.h>
 #include <time.h>
+#include <algorithm>
 
 bool Span::_seeded = false;
 
@@ -14,7 +16,7 @@ bool Span::_seeded = false;
 Span::Span() : _nbrOfElements(0), _currentIndex(0), _vector(std::vector<int>())
 {
     if (!_seeded) {
-        srand(time(NULL));
+        srand(time(0));
         _seeded = true;
     }
     std::cout << "An empty span has been created." << std::endl;
@@ -66,8 +68,6 @@ int Span::shortestSpan() throw(NoSpanCanBeFound)
 
     //all_differences.begin() + 1 as the first difference is sorted[0] - sorted[0]
     return *std::min_element(all_differences.begin() + 1, all_differences.end());
-
-    return 0;
 }
 
 int Span::longestSpan() throw(NoSpanCanBeFound)
@@ -85,9 +85,9 @@ int Span::longestSpan() throw(NoSpanCanBeFound)
 void    Span::fill_random(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
     for (std::vector<int>::iterator it = begin; it != end; it++) {
-        *it = rand() - RAND_MAX / 2;
+        *it = rand();
     }
-    _currentIndex = _vector.size() - 1;
+    _currentIndex = _vector.size();
 }
 
 std::vector<int>::iterator Span::begin()
