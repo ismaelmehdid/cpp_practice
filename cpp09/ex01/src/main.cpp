@@ -8,6 +8,10 @@ int main(int argc, char **argv)
         std::cout << "Error: The program must take one argument ONLY." << std::endl;
         return 1;
     }
-    std::cout << rpn(argv[1]) << std::endl;
+    try {
+        std::cout << rpn(argv[1]) << std::endl;
+    } catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
     return 0;
 }
