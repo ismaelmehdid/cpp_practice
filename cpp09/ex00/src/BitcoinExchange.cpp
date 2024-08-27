@@ -1,5 +1,7 @@
 #include "../include/BitcoinExchange.hpp"
 
+#include <iomanip>
+
 Date::Date() : _year(1), _month(1), _day(1) {}
 
 Date::Date(unsigned int year, unsigned int month, unsigned int day)
@@ -35,12 +37,12 @@ Date::Date(const Date &toCopy)
 
 const char *Date::InvalidDateException::what() const throw()
 {
-    return "Invalid date.";
+    return "Error: Invalid date.";
 }
 
 const char *InvalidFileFormat::what() const throw()
 {
-    return "Invalid file format.";
+    return "Error: Invalid file format.";
 }
 
 const char *NegativeValue::what() const throw()
@@ -62,9 +64,9 @@ const char *TooLargeNumber::what() const throw()
 //                       Operators overload
 //===----------------------------------------------------------------------===//
 
-std::ostream& operator<<(std::ostream& os, const Date& dt)
+std::ostream& operator<<(std::ostream& os, const Date& date)
 {
-    os << dt._year << '/' << dt._month << '/' << dt._day;
+    os << std::setfill('0') << std::setw(4) << date._year << '-' << std::setw(2) << date._month << '-' << std::setw(2) << date._day;
     return os;
 }
 
@@ -91,5 +93,5 @@ Date &Date::operator=(const Date &toCopy)
 
 bool Date::operator!=(const Date &other) const
 {
-    return _year == other._year && _month == other._month && _day == other._day; 
+    return _year != other._year || _month != other._month || _day != other._day; 
 }

@@ -5,12 +5,6 @@
 
 class Date
 {
-    class InvalidDateException : public std::exception
-    {
-        public:
-            virtual const char *what() const throw();
-    };
-
     public:
         Date(unsigned int year, unsigned int month, unsigned int day);
         Date(const Date &toCopy);
@@ -21,6 +15,13 @@ class Date
         unsigned int _year;
         unsigned int _month;
         unsigned int _day;
+
+        class InvalidDateException : public std::exception
+        {
+            public:
+                virtual const char *what() const throw();
+        };
+
     private:
         Date();
 };

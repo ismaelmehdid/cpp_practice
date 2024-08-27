@@ -65,7 +65,7 @@ Date extract_date(const std::string &line, size_t spliting_character_index, bool
             std::cout << "At this line: " << line << std::endl;
             throw InvalidFileFormat();
         }
-        std::cout << "Error: Bad date => " << date << std::endl;
+        throw Date::InvalidDateException();
     }
 
     Date newDate(year, month, day);
@@ -95,7 +95,7 @@ double extract_value(const std::string &line, size_t spliting_character_index, b
     }
     if (double_value < 0) {
         throw NegativeValue();
-    } else if (double_value > std::numeric_limits<int>::max()) {
+    } else if (from_provided && double_value > 1000) {
         throw TooLargeNumber();
     }
     
@@ -128,23 +128,25 @@ void display_provided_values(std::map<Date, double> &data, std::ifstream &provid
     while (std::getline(provided_file, line)) {
         if (is_only_spaces(line))
             continue ;
-                size_t pipe = line.find("|");
+        size_t pipe = line.find("|");
         if (pipe == std::string::npos) {
-            std::cout << "Error: bad input => " << line << std::endl;
+            std::cout << "Error: bad input on this line => " << line << std::endl;
             continue ;
         }
         try {
             Date date = extract_date(line, pipe, true);
             double value = extract_value(line, pipe, true);
             std::map<Date, double>::iterator it = data.lower_bound(date);
-            if (it == data.end()) { // TODO: understand
-                std::cout << "??" << std::endl;
-            } else if (it->first != date) {
+            if (it == data.end() || it->first != date) {
                 if (it != data.begin()) {
-                    --it;
+                    it--;
+                    std::cout << date << " => " << value << " = " << value * it->second << std::endl;
+                } else {
+                    std::cout << "Error: Date too old => " << date << std::endl;
                 }
+            } else {
+                std::cout << date << " => " << value << " = " << value * it->second << std::endl;
             }
-            std::cout << date << " => " << value << " = " << value * it->second << std::endl;
         } catch (std::exception &e) {
             std::cout << e.what() << std::endl;
         }
