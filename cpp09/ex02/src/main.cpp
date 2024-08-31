@@ -5,6 +5,8 @@
 #include <deque>
 #include <algorithm>
 #include <limits>
+#include <utility>
+#include <vector>
 
 //===----------------------------------------------------------------------===//
 //                       Parsing
@@ -59,8 +61,9 @@ void binary_search_insertion(T &sorted, int toInsert)
     typename T::iterator right = sorted.end();
 
     while (left != right) {
-        typename T::iterator middle = left;
-        std::advance(middle, std::distance(left, right) / 2);
+        typename T::iterator middle = left; // start from left to determine the middle
+        // O(1) for queu and O(N) for lists
+        std::advance(middle, std::distance(left, right) / 2); // determine the middle 
 
         if (toInsert < *middle) {
             right = middle;
@@ -73,82 +76,60 @@ void binary_search_insertion(T &sorted, int toInsert)
 }
 
 template <typename T>
-T merge_insertion_sort(T container)
-{
-    std::cout << "-----------------------------------------------------" << std::endl;
-    for (typename T::iterator it = container.begin(); it != container.end(); it++) {
-        std::cout << *it << " ";
-    }
-    std::cout << std::endl;
+void merge_insertion_sort(T &container) {
+
     if (container.size() < 2) {
-        return container;
+        return;
     }
 
-    if (container.size() == 2) {
-        if ((*container.begin()) > *(++container.begin())) {
-            int temp = (*container.begin());
-            (*container.begin()) = *(++container.begin());
-             *(++container.begin()) = temp;
+    std::vector<int> maxElements;
+    std::vector<int> minElements;
+
+    std::pair<long, int> save(std::numeric_limits<long>::max(), 0); // minOfMax, his pair
+
+    // Step 1 and 2: Create pairs and create minElements and maxElements
+    typename T::iterator it = container.begin();
+    while (it != container.end()) {
+        int first = *it++;
+        if (it == container.end()) {
+            minElements.push_back(first);
+            break;
         }
-        return container;
-    }
+        int second = *it++;
 
-    typename T::iterator first = container.begin();
-    typename T::iterator second = ++container.begin();
-
-    T maxElements;
-
-    long minOfMax = std::numeric_limits<long>::max();
-    int secondMin;
-    typename T::iterator secondMinIterator;
-
-    while (first != container.end() && second != container.end()) {
-
-        int max = std::max(*first, *second);
-
-        if (minOfMax > max) {
-            minOfMax = max;
-            if (max == *first) {
-                secondMin = *second;
-                secondMinIterator = second;
-            } else {
-                secondMin = *first;
-                secondMinIterator = first;
+        if (first > second) {
+            if (first < save.first) {
+                save.first = first;
+                save.second = second;
             }
-        }
-        std::cout << "Max of pair: <" << *first << ", " << *second << "> is " << max << std::endl;
-        maxElements.push_back(max);
-        if (*first > *second) {
-            typename T::iterator saveFirst = first;
-            second++;
-            if (second == container.end()) break;
-            second++;
-            first++;
-            first++;
-            container.erase(saveFirst);
+            maxElements.push_back(first);
+            minElements.push_back(second);
         } else {
-            typename T::iterator saveSecond = second;
-            second++;
-            if (second == container.end()) break;
-            second++;
-            first++;
-            first++;
-            container.erase(saveSecond);
+            if (second < save.first) {
+                save.first = second;
+                save.second = first;
+            }
+            maxElements.push_back(second);
+            minElements.push_back(first);
         }
-
-        std::cout << "HO" << std::endl;
     }
 
-    maxElements = merge_insertion_sort(maxElements);
+    // Step 3: Sort the maxElements (S) recursively in ascending order.
+    T maxElementsSorted(maxElements.begin(), maxElements.end());
+    merge_insertion_sort(maxElementsSorted);
 
-    maxElements.push_front(secondMin);
-    container.erase(secondMinIterator);
+    // Step 4: Insert the pair of the smallest element from maxElement at the begining of maxElementsSorted
+    maxElementsSorted.push_front(save.second);
+    std::vector<int>::iterator it2 = find(minElements.begin(), minElements.end(), save.second);
+    if (it2 != minElements.end())
+        minElements.erase(it2);
 
-    for (typename T::iterator it = container.begin(); it != container.end(); it++) {
-        binary_search_insertion(maxElements, *it);
+    // Step 5: Merge minElements into the sorted maxElements using binary search
+    for (typename std::vector<int>::iterator it = minElements.begin(); it != minElements.end(); ++it) {
+        binary_search_insertion(maxElementsSorted, *it);
     }
 
-    return maxElements;
+    container = maxElementsSorted;
 }
 
 
@@ -171,7 +152,7 @@ int main(int argc, char **argv)
     }
     std::cout << std::endl;
 
-    deque = merge_insertion_sort(deque);
+    merge_insertion_sort(deque);
 
     std::cout << "After: ";
     for (std::deque<int>::iterator it = deque.begin(); it != deque.end(); it++) {
@@ -188,7 +169,7 @@ int main(int argc, char **argv)
 
     if (store_inputs(argc, argv, list) != 0) return 1;
 
-    list = merge_insertion_sort(list);
+    merge_insertion_sort(list);
 
     double list_duration = (std::clock() - start_list) / (double)CLOCKS_PER_SEC * 1000;
     std::cout << "Time to process a range of " << list.size() << " elements with std::list : " << list_duration << "ms" << std::endl;
